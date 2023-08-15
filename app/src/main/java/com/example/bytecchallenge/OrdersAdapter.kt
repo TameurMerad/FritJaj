@@ -1,5 +1,7 @@
 package com.example.bytecchallenge
 
+import android.app.Activity
+import android.provider.DocumentsContract.Root
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class OrdersAdapter(val orderList: List<Order>):RecyclerView.Adapter<OrdersAdapter.MyAdapterViewHolder>() {
-    inner class MyAdapterViewHolder (itemView:View):RecyclerView.ViewHolder(itemView)
+class OrdersAdapter(val orderList: MutableList<Order>):RecyclerView.Adapter<OrdersAdapter.MyAdapterViewHolder>() {
+    inner class MyAdapterViewHolder (itemView:View):RecyclerView.ViewHolder(itemView){
+        lateinit var done:ImageView
+            init {
+                done = itemView.findViewById<ImageView>(R.id.checkId)
+                done.setOnClickListener {
+                    orderList.removeAt(position)
+                    notifyDataSetChanged()
+                    itemView.rootView.findViewById<TextView>(R.id.ordersCount).text = "Orders left : ${orderList.size}"
+
+                }
+            }
+
+    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyAdapterViewHolder {
         val view = LayoutInflater.from(p0.context).inflate(R.layout.jaj_frit_item,p0,false)

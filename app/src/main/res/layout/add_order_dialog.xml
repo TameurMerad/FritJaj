@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="?attr/colorOnSecondary"
+    app:cardCornerRadius="15dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:errorEnabled="true"
+            app:boxCornerRadiusTopStart="15dp">
+
+            <EditText
+                android:id="@+id/jajNumberInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jaj Number"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingBottom="18sp"
+                android:singleLine="true"
+                android:textSize="14dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true"
+
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusTopStart="15dp">
+
+            <EditText
+                android:id="@+id/fritNumberInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Frit Number"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingBottom="18sp"
+                android:singleLine="true"
+                android:textSize="14dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="Cancel"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Order"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

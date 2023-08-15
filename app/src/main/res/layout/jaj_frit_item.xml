@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:background="?attr/colorOnSecondary"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="15dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/maklaPic"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/jaj_wfrit"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/maklaPic"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/jajNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jaj: 00"
+                android:textSize="17sp"
+                tools:layout_editor_absoluteX="164dp"
+                tools:layout_editor_absoluteY="36dp" />
+
+            <TextView
+                android:id="@+id/fritNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frit: 00"
+                android:textSize="17sp"
+                tools:layout_editor_absoluteX="162dp"
+                tools:layout_editor_absoluteY="62dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/checkId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/check"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

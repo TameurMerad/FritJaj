@@ -9,4 +9,10 @@
     </style>
 
     <style name="Theme.ByteCchallenge" parent="Base.Theme.ByteCchallenge" />
+    <style name="splash_screen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">
+            @drawable/splash_screen
+        </item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+    </style>
 </resources>

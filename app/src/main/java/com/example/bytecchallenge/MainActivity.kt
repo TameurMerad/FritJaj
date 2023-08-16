@@ -1,10 +1,14 @@
 package com.example.bytecchallenge
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,6 +22,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        setTheme(R.style.Theme_ByteCchallenge)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val fab = findViewById<FloatingActionButton>(R.id.fab)
@@ -32,6 +38,17 @@ class MainActivity : AppCompatActivity() {
         recyclerViewJaj.layoutManager = LinearLayoutManager(this)
         val orderCount = findViewById<TextView>(R.id.ordersCount)
         orderCount.text = "Orders left : ${orderList.size}"
+
+        val dialogBinding2 = layoutInflater.inflate(R.layout.no_internet, null)
+        val myDialog2 = Dialog(this)
+        myDialog2.setContentView(dialogBinding2)
+        myDialog2.setCancelable(true)
+        myDialog2.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        if (!isNetworkAvailable()) {
+            myDialog2.show()
+        }
+
+
 
         val dialogBinding = layoutInflater.inflate(R.layout.add_order_dialog, null)
         val myDialog = Dialog(this)
@@ -72,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 myDialog.dismiss()
             }
             add.setOnClickListener {
-                if (jaj.text.isEmpty()&& frit.text.isEmpty()){
+                if ((jaj.text.isEmpty()||jaj.text.toString()=="0")&& (frit.text.isEmpty()||frit.text.toString()=="0")){
                     jaj.error = "empty field"
                     frit.error = "empty field"
                 }else{
@@ -91,9 +108,30 @@ class MainActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
             }
+                jaj.text.clear()
+                frit.text.clear()
+
             }
 
+        }
 
+
+
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+            return networkCapabilities != null &&
+                    (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected
         }
     }
 }

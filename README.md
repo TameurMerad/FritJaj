@@ -9,6 +9,9 @@ features :
 -sharedpreference to save the last night/light mode edit
 
 
+-add and remove order and orders countdown 
+
+
 -splash screen using the theme change method (not the delay (uneffective)) 
 
 

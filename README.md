@@ -28,7 +28,21 @@ missing :
 
 
 
+
+screenshots : 
+
+
+
+
 https://github.com/TameurMerad/FritJaj/assets/126992679/b8aa464b-5542-4417-a4f7-b13bec365903
 
+
+
+
+https://github.com/TameurMerad/FritJaj/assets/126992679/4699b125-1daa-415b-bfed-add6bd7e4e15
+
+
+
+https://github.com/TameurMerad/FritJaj/assets/126992679/2a8dceaa-528a-422e-8ff5-0ae6a0b627d6
 
 

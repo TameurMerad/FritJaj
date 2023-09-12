@@ -9,16 +9,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class OrdersAdapter(val orderList: MutableList<Order>):RecyclerView.Adapter<OrdersAdapter.MyAdapterViewHolder>() {
+class OrdersAdapter(val orderList: MutableList<Order>,private val mainActivity: MainActivity):RecyclerView.Adapter<OrdersAdapter.MyAdapterViewHolder>() {
     inner class MyAdapterViewHolder (itemView:View):RecyclerView.ViewHolder(itemView){
         lateinit var done:ImageView
             init {
                 done = itemView.findViewById<ImageView>(R.id.checkId)
                 done.setOnClickListener {
                     orderList.removeAt(position)
+                    mainActivity.saveData()
                     notifyDataSetChanged()
                     itemView.rootView.findViewById<TextView>(R.id.ordersCount).text = "Orders left : ${orderList.size}"
-
                 }
             }
 

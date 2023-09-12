@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class MainActivity : AppCompatActivity() {
+
+    private var orderList = mutableListOf<Order>()
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.Theme_ByteCchallenge)
@@ -28,12 +32,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         val switcher = findViewById<SwitchMaterial>(R.id.switcherNightDay)
-        var editor: SharedPreferences.Editor? = null
-        var sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
-        var nightMode = sharedPreferences?.getBoolean("night", false)!!
-        val orderList = mutableListOf<Order>()
+        var editorr: SharedPreferences.Editor? = null
+        var sharedPreferencess = getSharedPreferences("MODE", Context.MODE_PRIVATE)
+        var nightMode = sharedPreferencess?.getBoolean("night", false)!!
+
+
+
+
+        loadData()
         val recyclerViewJaj = findViewById<RecyclerView>(R.id.recyclerViewJaj)
-        val adapter = OrdersAdapter(orderList)
+        val adapter = OrdersAdapter(orderList,this)
         recyclerViewJaj.adapter = adapter
         recyclerViewJaj.layoutManager = LinearLayoutManager(this)
         val orderCount = findViewById<TextView>(R.id.ordersCount)
@@ -64,15 +72,15 @@ class MainActivity : AppCompatActivity() {
         switcher.setOnCheckedChangeListener { compoundButton, state ->
             if (nightMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                editor = sharedPreferences?.edit()
-                editor?.putBoolean("night", false)
+                editorr = sharedPreferencess?.edit()
+                editorr?.putBoolean("night", false)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                editor = sharedPreferences?.edit()
-                editor?.putBoolean("night", true)
+                editorr = sharedPreferencess?.edit()
+                editorr?.putBoolean("night", true)
 
             }
-            editor?.apply()
+            editorr?.apply()
         }
 
 //        orderList.add(Order("Jaj: 11", "Frit :12", R.drawable.frit))
@@ -89,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 myDialog.dismiss()
             }
             add.setOnClickListener {
-                if ((jaj.text.isEmpty()||jaj.text.toString()=="0")&& (frit.text.isEmpty()||frit.text.toString()=="0")){
+                if ((jaj.text.isEmpty()||jaj.text.toString().toInt()==0)&&(frit.text.isEmpty()||frit.text.toString().toInt()==0)){
                     jaj.error = "empty field"
                     frit.error = "empty field"
                 }else{
@@ -106,11 +114,11 @@ class MainActivity : AppCompatActivity() {
                     orderCount.text = "Orders left : ${orderList.size}"
                     myDialog.dismiss()
                 }
+                saveData()
                 adapter.notifyDataSetChanged()
             }
                 jaj.text.clear()
                 frit.text.clear()
-
             }
 
         }
@@ -118,6 +126,31 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+    fun saveData() {
+        val sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(orderList)
+        editor.putString("taskList",json)
+        editor.apply()
+    }
+    private fun loadData() {
+        val sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("taskList",null)
+        val type = object : TypeToken<MutableList<Order>>() {}.type
+        orderList = gson.fromJson(json, type) ?: mutableListOf()
+    }
+
+
+
+
+
+
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

@@ -21,13 +21,11 @@ features :
 -using native dev language KOTLIN for better performance 
 
 
+-sharedpreference using json file to save the arraylist of the recyclerview
+
+
 - ...
 
-
-missing :
-
-
--room data base or sharedpreference using json file to save the arraylist of the recyclerview
 
 
 
